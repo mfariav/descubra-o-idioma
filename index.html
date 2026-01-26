@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Descubra o Idioma</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main>
+
+        <!--Página inicial-->
+        <section id="play">
+            <img src="" alt="Logo Descubra o Idioma">
+            <h2>Pronto?</h2>
+            <button class="play-button">JOGAR</button>
+        </section>
+
+        <!-- Tela do Quiz -->
+        <section id="quiz-screen">
+            <img src="" alt="Logo Descubra o Idioma">
+            <p><img src="" alt="ícone tempo">00:00</p>
+            <p><img src="" alt="ícone pontos"><span id="points">0</span> pontos</p>
+            <p><img src="" alt="ícone vidas"><span id="lives">0</span> vidas</p>
+            <div>
+                <h2 id="question-title">Qual é o idioma?</h2>
+                <h3 id="sentence">Frase</h3>
+                <section id="options">
+                    <p><b>A</b> Inglês</p>
+                    <p><b>B</b> Romeno</p>
+                    <p><b>C</b> Japonês</p>
+                </section>
+            </div>
+        </section>
+
+        <!-- Tela Fim de Jogo -->
+        <section id="game-over">
+            <h2>Fim de Jogo</h2>
+            <p>Sua pontuação: <span id="final-points">0</span></p>
+            <button id="restart-button">JOGAR NOVAMENTE</button>
+        </section>
+
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

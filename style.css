@@ -1,0 +1,21 @@
+/* Oculta a tela do quiz */
+#quiz-screen, #game-over {
+    display: none;
+}
+
+/* Sinalização certo ou errado */
+.option {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.option.correct {
+  background-color: #4caf50;
+  color: white;
+}
+
+.option.wrong {
+  background-color: #f44336;
+  color: white;
+}
+

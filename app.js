@@ -7,18 +7,22 @@ const livesEl = document.getElementById('lives');
 const gameOverScreen = document.getElementById('game-over');
 const finalPointsEl = document.getElementById('final-points');
 const restartButton = document.getElementById('restart-button');
-
 const sentenceEl = document.getElementById('sentence');
 const optionsEl = document.getElementById('options');
+const timerEl = document.getElementById('timer');
 
 let pontos = 0;
 let vidas = 3;
-let jogoAtivo = true;
+let jogoAtivo = false;
 let indicePergunta = 0;
 let modo = "idioma";
 let podeClicar = true;
 
-// Botão JOGAR
+let time = 10;
+let timerInterval = null;
+let respostaCorretaAtual = "";
+
+// START GAME
 function startGame() {
     pontos = 0;
     vidas = 3;
@@ -30,6 +34,7 @@ function startGame() {
     livesEl.textContent = vidas;
 
     playSection.style.display = 'none';
+    gameOverScreen.style.display = 'none';
     quizScreen.style.display = 'block';
 
     mostrarPergunta();
@@ -37,36 +42,86 @@ function startGame() {
 
 playButton.addEventListener('click', startGame);
 
-// Enter para jogar
+// TIMER
+function formatTime(seconds) {
+    return `00:${seconds.toString().padStart(2, '0')}`;
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+
+    time = 10;
+    timerEl.textContent = formatTime(time);
+
+    timerInterval = setInterval(() => {
+        time--;
+        timerEl.textContent = formatTime(time);
+
+        if (time <= 0) {
+            clearInterval(timerInterval);
+            timeOut();
+        }
+    }, 1000);
+}
+
+function timeOut() {
+    if (!jogoAtivo) return;
+
+    podeClicar = false;
+
+    if (modo === "idioma") {
+        vidas--;
+        livesEl.textContent = vidas;
+    }
+
+
+    document.querySelectorAll('.option').forEach(opcao => {
+        if (opcao.textContent === respostaCorretaAtual) {
+            opcao.classList.add('correct');
+        } else {
+            opcao.classList.add('wrong');
+        }
+        opcao.style.pointerEvents = 'none';
+    });
+
+    if (vidas <= 0 && modo === "idioma") {
+        setTimeout(gameOver, 1000);
+    } else {
+        avancarPergunta();
+    }
+}
+
+// ENTER PARA JOGAR
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && playSection.style.display !== 'none') {
         startGame();
     }
 });
 
+// PERGUNTAS
 function mostrarPergunta() {
     if (!jogoAtivo) return;
 
-    const pergunta = perguntas[indicePergunta];
+    clearInterval(timerInterval);
 
-    let opcoes;
-    let respostaCorreta;
+    const pergunta = perguntas[indicePergunta];
+    let opcoes = [];
 
     if (modo === "idioma") {
         titleEl.textContent = "Qual é o idioma?";
         opcoes = pergunta.opcoesIdioma;
-        respostaCorreta = pergunta.idioma;
+        respostaCorretaAtual = pergunta.idioma;
     } else {
         titleEl.textContent = "Qual é a tradução?";
         opcoes = pergunta.opcoesTraducao;
-        respostaCorreta = pergunta.traducao;
+        respostaCorretaAtual = pergunta.traducao;
     }
 
     sentenceEl.textContent = pergunta.frase;
     optionsEl.innerHTML = "";
     podeClicar = true;
 
-    opcoes.forEach((opcao) => {
+    opcoes.forEach(opcao => {
         const p = document.createElement('p');
         p.textContent = opcao;
         p.classList.add('option');
@@ -74,61 +129,74 @@ function mostrarPergunta() {
         p.addEventListener('click', () => {
             if (!podeClicar || !jogoAtivo) return;
 
-            if (opcao === respostaCorreta) {
+            clearInterval(timerInterval);
+            podeClicar = false;
+
+            if (opcao === respostaCorretaAtual) {
                 p.classList.add('correct');
                 pontos += 10;
                 pointsEl.textContent = pontos;
             } else {
                 p.classList.add('wrong');
-                vidas--;
-                livesEl.textContent = vidas;
 
-                if (vidas <= 0) {
-                    gameOver();
-                    return;
+                if (modo === "idioma") {
+                    vidas--;
+                    livesEl.textContent = vidas;
                 }
             }
 
-            document.querySelectorAll('.option').forEach((el) => {
-                if (el.textContent === respostaCorreta) {
+
+            document.querySelectorAll('.option').forEach(el => {
+                if (el.textContent === respostaCorretaAtual) {
                     el.classList.add('correct');
                 }
+                el.style.pointerEvents = 'none';
             });
 
-            podeClicar = false;
-
-            setTimeout(() => {
-                if (!jogoAtivo) return;
-
-                if (modo === "idioma") {
-                    modo = "traducao";
-                } else {
-                    modo = "idioma";
-                    indicePergunta++;
-                }
-
-                if (indicePergunta >= perguntas.length) {
-                    gameOver();
-                    return;
-                }
-
-                restartButton.addEventListener('click', () => {
-                    gameOverScreen.style.display = 'none';
-                    startGame();
-                });
-
-                mostrarPergunta();
-            }, 800);
+            if (vidas <= 0 && modo === "idioma") {
+                setTimeout(gameOver, 1000);
+            } else {
+                avancarPergunta();
+            }
         });
 
         optionsEl.appendChild(p);
     });
+
+    startTimer();
+}
+
+function avancarPergunta() {
+    setTimeout(() => {
+        if (!jogoAtivo) return;
+
+        if (modo === "idioma") {
+            modo = "traducao";
+        } else {
+            modo = "idioma";
+            indicePergunta++;
+        }
+
+        if (indicePergunta >= perguntas.length) {
+            gameOver();
+            return;
+        }
+
+        mostrarPergunta();
+    }, 800);
 }
 
 function gameOver() {
     jogoAtivo = false;
+    clearInterval(timerInterval);
+
     quizScreen.style.display = 'none';
     gameOverScreen.style.display = 'block';
     finalPointsEl.textContent = pontos;
 }
+
+restartButton.addEventListener('click', startGame);
+
+
+
 

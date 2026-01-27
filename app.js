@@ -49,6 +49,7 @@ function formatTime(seconds) {
 
 function startTimer() {
     clearInterval(timerInterval);
+    timerEl.classList.remove('timer-danger');
 
     time = 10;
     timerEl.textContent = formatTime(time);
@@ -57,12 +58,20 @@ function startTimer() {
         time--;
         timerEl.textContent = formatTime(time);
 
+        if (time <= 3) {
+            timerEl.classList.add('timer-danger');
+        } else {
+            timerEl.classList.remove('timer-danger');
+        }
+
         if (time <= 0) {
             clearInterval(timerInterval);
+            timerEl.classList.remove('timer-danger');
             timeOut();
         }
     }, 1000);
 }
+
 
 function timeOut() {
     if (!jogoAtivo) return;
@@ -121,10 +130,11 @@ function mostrarPergunta() {
     optionsEl.innerHTML = "";
     podeClicar = true;
 
-    opcoes.forEach(opcao => {
+    opcoes.forEach((opcao, index) => {
         const p = document.createElement('p');
         p.textContent = opcao;
         p.classList.add('option');
+        p.setAttribute('data-index', String.fromCharCode(65 + index));
 
         p.addEventListener('click', () => {
             if (!podeClicar || !jogoAtivo) return;
@@ -197,6 +207,14 @@ function gameOver() {
 
 restartButton.addEventListener('click', startGame);
 
+// TIMER PISCANDO
+if (time <= 3) timerEl.classList.add('timer-danger');
+else timerEl.classList.remove('timer-danger');
 
+//LOGO QUIZ PARA A TELA INICIAL
+document.getElementById("go-home").addEventListener("click", (e) => {
+  e.preventDefault();
 
-
+  document.getElementById("quiz-screen").style.display = "none";
+  document.getElementById("play").style.display = "block";
+});

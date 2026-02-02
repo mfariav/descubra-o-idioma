@@ -1,5 +1,7 @@
 # 🌍 Desafio de Idiomas
 
+![Screenshot do jogo](assets/screenshot.png)
+
 Mini game de quiz onde o jogador adivinha:
 - qual é o idioma
 - qual é a tradução
@@ -17,4 +19,4 @@ Clique em **JOGAR** e escolha a resposta correta antes do tempo acabar. Dentro q
 - JavaScript 
 
 ## ▶️ Demo
-
+https://mfariav.github.io/descubra-o-idioma/

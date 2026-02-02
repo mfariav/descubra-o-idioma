@@ -24,6 +24,8 @@ let respostaCorretaAtual = "";
 
 // START GAME
 function startGame() {
+    clearInterval(timerInterval);
+
     pontos = 0;
     vidas = 3;
     indicePergunta = 0;
@@ -49,12 +51,17 @@ function formatTime(seconds) {
 
 function startTimer() {
     clearInterval(timerInterval);
-    timerEl.classList.remove('timer-danger');
 
     time = 10;
     timerEl.textContent = formatTime(time);
+    timerEl.classList.remove('timer-danger');
 
     timerInterval = setInterval(() => {
+        if (!jogoAtivo) {
+            clearInterval(timerInterval);
+            return;
+        }
+
         time--;
         timerEl.textContent = formatTime(time);
 
@@ -66,12 +73,10 @@ function startTimer() {
 
         if (time <= 0) {
             clearInterval(timerInterval);
-            timerEl.classList.remove('timer-danger');
             timeOut();
         }
     }, 1000);
 }
-
 
 function timeOut() {
     if (!jogoAtivo) return;
@@ -83,7 +88,6 @@ function timeOut() {
         livesEl.textContent = vidas;
     }
 
-
     document.querySelectorAll('.option').forEach(opcao => {
         if (opcao.textContent === respostaCorretaAtual) {
             opcao.classList.add('correct');
@@ -94,7 +98,7 @@ function timeOut() {
     });
 
     if (vidas <= 0 && modo === "idioma") {
-        setTimeout(gameOver, 1000);
+        setTimeout(gameOver, 800);
     } else {
         avancarPergunta();
     }
@@ -148,13 +152,11 @@ function mostrarPergunta() {
                 pointsEl.textContent = pontos;
             } else {
                 p.classList.add('wrong');
-
                 if (modo === "idioma") {
                     vidas--;
                     livesEl.textContent = vidas;
                 }
             }
-
 
             document.querySelectorAll('.option').forEach(el => {
                 if (el.textContent === respostaCorretaAtual) {
@@ -164,7 +166,7 @@ function mostrarPergunta() {
             });
 
             if (vidas <= 0 && modo === "idioma") {
-                setTimeout(gameOver, 1000);
+                setTimeout(gameOver, 800);
             } else {
                 avancarPergunta();
             }
@@ -193,7 +195,7 @@ function avancarPergunta() {
         }
 
         mostrarPergunta();
-    }, 800);
+    }, 700);
 }
 
 function gameOver() {
@@ -207,14 +209,15 @@ function gameOver() {
 
 restartButton.addEventListener('click', startGame);
 
-// TIMER PISCANDO
-if (time <= 3) timerEl.classList.add('timer-danger');
-else timerEl.classList.remove('timer-danger');
-
-//LOGO QUIZ PARA A TELA INICIAL
+// VOLTAR PARA HOME
 document.getElementById("go-home").addEventListener("click", (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  document.getElementById("quiz-screen").style.display = "none";
-  document.getElementById("play").style.display = "block";
+    jogoAtivo = false;
+    clearInterval(timerInterval);
+
+    quizScreen.style.display = "none";
+    gameOverScreen.style.display = "none";
+    playSection.style.display = "block";
 });
+

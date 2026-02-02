@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -16,6 +16,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+h2 {
+  font-size: 35px;
 }
 
 /* TÍTULO */
@@ -36,10 +40,15 @@ h1 {
 #play,
 #quiz-screen,
 #game-over {
-  width: 420px;
+  width: 500px;
   padding: 32px;
   border-radius: 16px;
   background: transparent;
+}
+
+#question-box {
+  border: 1px solid white;
+  padding: 30px;
 }
 
 /* HOME */
@@ -47,9 +56,9 @@ h1 {
   text-align: center;
 }
 
-#play p {
-  font-size: 18px;
-  margin-bottom: 20px;
+#play h2 {
+  margin-bottom: 30px;
+  margin-top: 50px;
 }
 
 .logo {
@@ -60,22 +69,42 @@ h1 {
 /* BOTÕES */
 .play-button,
 #restart-button {
-  padding: 14px 28px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 20px 50px;
+  font-size: 20px;
+  font-weight: 700;
   border-radius: 6px;
-  border: 1px solid #fff;
-  background: linear-gradient(to bottom, #ffffff, #b53a67);
-  color: #6d1237;
+  border: 2px solid #fff;
+  background-color: rgba(0, 0, 0, 0.15);
+  color: #ffffff;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.play-button,
+#restart-button {
+  transition: background-color 0.15s ease;
+}
+
 .play-button:hover,
 #restart-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.3);
+  animation: tremida-diagonal 0.25s ease-in-out;
 }
+
+@keyframes tremida-diagonal {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-0.6px, 0.6px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
 
 /* STATUS */
 .header {
@@ -105,27 +134,28 @@ h1 {
   height: auto;
   display: block;
   margin: 0 auto;
+  padding-bottom: 20px;
 }
 
 /* ICONES */
 .icones {
-  max-width:40%;
+  max-width: 40%;
   height: auto;
 }
 
 .status-bar {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    gap: 50px; 
-    padding: 30px 0 30px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  padding: 30px 0 30px 0;
 }
 
 .status-bar p {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
 }
 
 
@@ -137,6 +167,7 @@ h1 {
   border-radius: 6px;
   text-align: center;
   font-weight: 600;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -234,8 +265,15 @@ h1 {
   text-align: center;
 }
 
+#game-over p {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  font-size: 20px;
+}
+
 #final-points {
   font-size: 32px;
   font-weight: 700;
   margin: 16px 0;
+
 }

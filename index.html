@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <title>Descubra o Idioma</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -28,7 +31,7 @@
                 <p><img class="icones" src="/assets/Icone-vida.png" alt="ícone vidas"><span id="lives">0</span> vidas
                 </p>
             </div>
-            <div>
+            <div id="question-box">
                 <h2 id="question-title">Qual é o idioma?</h2>
                 <h3 id="sentence">Frase</h3>
                 <section id="options">
@@ -42,7 +45,7 @@
         <!-- Tela Fim de Jogo -->
         <section id="game-over">
             <h2>Fim de Jogo</h2>
-            <p>Sua pontuação: <span id="final-points">0</span></p>
+            <p>Sua pontuação:<br> <span id="final-points">0</span></p>
             <button id="restart-button">JOGAR NOVAMENTE</button>
         </section>
 

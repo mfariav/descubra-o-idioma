@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title>Descubra o Idioma</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,31 +15,40 @@
 <body>
     <main>
 
-        <!--Página inicial-->
+        <!-- Página inicial -->
         <section id="play">
-            <img class="logo" src="/assets/Logo-DI.png" alt="Logo Descubra o Idioma">
+            <img class="logo" src="assets/Logo-DI.png" alt="Logo Descubra o Idioma">
             <h2>Pronto?</h2>
             <button class="play-button">JOGAR</button>
         </section>
 
         <!-- Tela do Quiz -->
         <section id="quiz-screen">
-            <a href="#" id="go-home"><img class="logo-quiz" src="/assets/Logo-DI.png" alt="Logo Descubra o Idioma"></a>
+            <a href="#" id="go-home">
+                <img class="logo-quiz" src="assets/Logo-DI.png" alt="Logo Descubra o Idioma">
+            </a>
+
             <div class="status-bar">
-                <p><img class="icones" src="/assets/Icone-tempo.png" alt="ícone tempo"><span id="timer">00:10</span></p>
-                <p><img class="icones" src="/assets/Icone-ponto.png" alt="ícone pontos"><span id="points">0</span>
-                    pontos</p>
-                <p><img class="icones" src="/assets/Icone-vida.png" alt="ícone vidas"><span id="lives">0</span> vidas
+                <p>
+                    <img class="icones" src="assets/Icone-tempo.png" alt="ícone tempo">
+                    <span id="timer">00:10</span>
+                </p>
+
+                <p>
+                    <img class="icones" src="assets/Icone-ponto.png" alt="ícone pontos">
+                    <span id="points">0</span> pontos
+                </p>
+
+                <p>
+                    <img class="icones" src="assets/Icone-vida.png" alt="ícone vidas">
+                    <span id="lives">0</span> vidas
                 </p>
             </div>
+
             <div id="question-box">
                 <h2 id="question-title">Qual é o idioma?</h2>
                 <h3 id="sentence">Frase</h3>
-                <section id="options">
-                    <p><b>A</b> Inglês</p>
-                    <p><b>B</b> Romeno</p>
-                    <p><b>C</b> Japonês</p>
-                </section>
+                <section id="options"></section>
             </div>
         </section>
 
@@ -53,7 +63,6 @@
 
     <script src="data.js"></script>
     <script src="app.js"></script>
-
 </body>
 
 </html>

@@ -258,23 +258,23 @@ img {
   #game-over {
     padding: 20px;
   }
+
+  .status-bar p {
+    font-size: 12px;
+  }
+
+  #quiz-screen.logo-quiz {
+    padding: 50px;
+  }
 }
 
 @media (max-width: 800px) {
-
-  main {
-    padding: 24px 18px;
+  #quiz-screen {
+    transform: translateY(-30px);
   }
 
-  .status-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px 20px;
+  .logo-quiz {
+    margin-top: 0;
+    margin-bottom: 12px;
   }
-
-  .status-bar p {
-    flex: 0 0 45%;
-    justify-content: center;
-  }
-
 }

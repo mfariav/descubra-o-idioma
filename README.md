@@ -1,5 +1,7 @@
 # 🌍 Desafio de Idiomas
 
+![Screenshot do jogo](assets/screenshot.png)
+
 Mini game de quiz onde o jogador adivinha:
 - qual é o idioma
 - qual é a tradução

@@ -17,4 +17,4 @@ Clique em **JOGAR** e escolha a resposta correta antes do tempo acabar. Dentro q
 - JavaScript 
 
 ## ▶️ Demo
-
+https://mfariav.github.io/descubra-o-idioma/
